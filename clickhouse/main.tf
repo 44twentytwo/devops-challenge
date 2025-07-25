@@ -1,4 +1,8 @@
 terraform {
+  backend "local" {
+    path = "/opt/terraform-volumes/clickhouse/data/terraform.tfstate"
+  }
+
   required_providers {
     docker = {
       source = "kreuzwerker/docker"
