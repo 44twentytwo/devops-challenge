@@ -28,7 +28,7 @@ resource "docker_container" "this" {
     host_path      = abspath("${path.module}/data")
     container_path = "/var/lib/clickhouse"
   }
-  
+
   env = [
     "CLICKHOUSE_DB=default",
     "CLICKHOUSE_USER=default",
