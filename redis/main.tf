@@ -1,10 +1,18 @@
+terraform {
+  required_providers {
+    docker = {
+      source = "kreuzwerker/docker"
+    }
+  }
+}
+
 resource "docker_image" "this" {
   name = var.image
 }
 
 resource "docker_container" "this" {
   name  = var.container_name
-  image = docker_image.this.latest
+  image = docker_image.this.name
 
   command = ["redis-server", "--appendonly", "yes"]
 
@@ -14,7 +22,7 @@ resource "docker_container" "this" {
   }
 
   volumes {
-    host_path      = "${path.module}/data"
+    host_path      = abspath("${path.module}/data")
     container_path = "/data"
   }
 
