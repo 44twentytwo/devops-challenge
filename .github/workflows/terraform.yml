@@ -31,7 +31,7 @@ jobs:
         run: terraform -chdir=${{ matrix.path }} plan -out=tfplan -input=false
 
   apply:
-#    if: github.event_name == 'push' && github.ref == 'refs/heads/master'
+    if: github.event_name == 'push' && github.ref == 'refs/heads/master'
     runs-on: self-hosted
     needs: [plan]
     environment:
