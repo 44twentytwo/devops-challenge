@@ -1,6 +1,6 @@
 terraform {
   backend "local" {
-    path = "/opt/terraform-volumes/clickhouse/data/terraform.tfstate"
+    path = "/opt/terraform-volumes/clickhouse/terraform.tfstate"
   }
 
   required_providers {

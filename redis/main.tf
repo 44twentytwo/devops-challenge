@@ -1,6 +1,6 @@
 terraform {
   backend "local" {
-    path = "/opt/terraform-volumes/redis/data/terraform.tfstate"
+    path = "/opt/terraform-volumes/redis/terraform.tfstate"
   }
 
   required_providers {
