@@ -1,10 +1,22 @@
+terraform {
+  required_providers {
+    docker = {
+      source = "kreuzwerker/docker"
+    }
+  }
+}
+
+provider "docker" {
+  host = "unix:///var/run/docker.sock"
+}
+
 resource "docker_image" "this" {
   name = var.image
 }
 
 resource "docker_container" "this" {
   name  = var.container_name
-  image = docker_image.this.latest
+  image = docker_image.this.name
 
   ports {
     internal = 9000
@@ -17,9 +29,15 @@ resource "docker_container" "this" {
   }
 
   volumes {
-    host_path      = "${path.module}/data"
+    host_path      = abspath("${path.module}/data")
     container_path = "/var/lib/clickhouse"
   }
+
+  env = [
+    "CLICKHOUSE_DB=default",
+    "CLICKHOUSE_USER=default",
+    "CLICKHOUSE_DEFAULT_ACCESS_MANAGEMENT=1"
+  ]
 
   restart = "unless-stopped"
 }
