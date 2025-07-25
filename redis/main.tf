@@ -26,7 +26,7 @@ resource "docker_container" "this" {
   }
 
   volumes {
-    host_path      = abspath("${path.module}/data")
+    host_path      = "/opt/terraform-volumes/redis/data"
     container_path = "/data"
   }
 

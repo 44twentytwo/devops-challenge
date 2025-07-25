@@ -29,7 +29,7 @@ resource "docker_container" "this" {
   }
 
   volumes {
-    host_path      = abspath("${path.module}/data")
+    host_path      = "/opt/terraform-volumes/clickhouse/data"
     container_path = "/var/lib/clickhouse"
   }
 
